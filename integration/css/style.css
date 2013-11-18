@@ -97,7 +97,7 @@ img {
 }
 
 .marginTopSmall{
-	margin-top: 1em;
+	margin-top: 1.8em;
 }
 
 .marginBottom{
@@ -263,16 +263,16 @@ img {
 
 }
 
-::-webkit-input-placeholder { /* WebKit browsers */
+.topBar ::-webkit-input-placeholder { /* WebKit browsers */
     color: white;
 }
-:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+.topBar :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
     color: white;
 }
-::-moz-placeholder { /* Mozilla Firefox 19+ */
+.topBar ::-moz-placeholder { /* Mozilla Firefox 19+ */
     color: white;
 }
-:-ms-input-placeholder { /* Internet Explorer 10+ */
+.topBar :-ms-input-placeholder { /* Internet Explorer 10+ */
     color: white;
 }
 
@@ -428,6 +428,45 @@ section p{
 #amount, #amount2{
 	border: none;
 	background-color: transparent;
+}
+
+#reglages input[name=nomPartie]{
+	color: #e84c3d;
+	width: 50%;
+	height: 3em;
+	display: block;
+	margin: auto;
+	background-color: #fee;
+	margin-bottom: 2em;
+	border: 2px solid #e84c3d;
+	text-align: center;
+	outline: none;
+}
+
+#reglages input[name=nomPartie]:hover{
+	border: 3px solid #e84c3d;
+	background-color: #eee;
+}
+
+#reglages #choisirNbrJoueur{
+	text-align: center;
+}
+
+#reglages ::-webkit-input-placeholder { /* WebKit browsers */
+    color: #e84c3d;
+    font-style: italic;
+}
+#reglages :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color: #e84c3d;
+    font-style: italic;
+}
+#reglages ::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color: #e84c3d;
+    font-style: italic;
+}
+#reglages :-ms-input-placeholder { /* Internet Explorer 10+ */
+    color: #e84c3d;
+    font-style: italic;
 }
 
 /* TOP CSS */
@@ -613,11 +652,11 @@ footer>div:nth-child(4)>div input[type=submit]{
 	z-index: 3;
 }
 
-section:last-of-type{
+section:last-of-type:not(#all){
 	background-color: #e84c3d;
 }
 
-section:last-of-type p{
+section:last-of-type:not(#all) p{
 	text-align: center;
 	color: white;
 }
@@ -968,7 +1007,7 @@ section:last-of-type p{
 	border-bottom-right-radius: 12px;
 }
 
-@media (max-width: 720px) {
+@media (max-width: 768px) {
 	header, section, footer{
 		overflow: hidden;
 	}
@@ -1035,4 +1074,37 @@ section:last-of-type p{
 
 }
 
+.pace {
+  -webkit-pointer-events: none;
+  pointer-events: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
 
+.pace.pace-inactive .pace-progress {
+  display: none;
+}
+
+.pace .pace-progress {
+  position: fixed;
+  z-index: 2000;
+  bottom: 0;
+  right: 0;
+  height: 5rem;
+  width: 5rem;
+}
+
+.pace .pace-progress:after {
+  display: block;
+  position: absolute;
+  bottom: .5rem;
+  right: .5rem;
+  content: attr(data-progress-text);
+  font-family: "Helvetica Neue", sans-serif;
+  font-weight: 100;
+  font-size: 3rem;
+  line-height: 1;
+  text-align: right;
+  color: rgba(0, 0, 0, 0.19999999999999996);
+}
