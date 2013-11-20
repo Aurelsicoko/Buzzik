@@ -1,0 +1,18 @@
+<div id="listeJoueur"></div>
+
+<div id="divPlayer">
+	<audio id="player" src=""></audio>
+	<button onclick="document.getElementById('player').play()" id="playButton">Play</button>
+	<button onclick="document.getElementById('player').volume-=0.1">Volume -</button>
+	<button onclick="document.getElementById('player').volume+=0.1">Volume +</button>
+</div>
+
+<script type="text/javascript">
+$('#playButton').on('click', function () {
+		alert("click");
+        socket.emit('debutPartie');
+        document.getElementById('player').play();
+});
+</script>
+
+
