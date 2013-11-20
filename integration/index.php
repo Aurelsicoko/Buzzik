@@ -9,7 +9,9 @@
 	<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+	<section id="listeJoueur"></section>
 	<section id="all">
+		<div id="buffer"></div>
 		<div id="rooms"></div>
 		<div id="dz-root"></div>
 		<div class="topBar">
@@ -328,6 +330,7 @@
 			</div>
 		</section>
 	</section>	
+	<script type="text/javascript" src="js/rafael.js"></script>
 	<script type="text/javascript" src="js/pace.js"></script>
 	<script src="http://cdn-files.deezer.com/js/min/dz.js"></script>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>

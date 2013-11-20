@@ -109,7 +109,8 @@ var room = {
     function GetPlayList(a, b){
       var playListUrl = a.split(',');
       var playListTitle = b.split(',');
-      $('body').load("template/player.html", function () {
+      $('#all').load("template/jeu.php", function(){
+        $('link[rel=stylesheet]:last-of-type').attr("href", "css/jeu.css");
         document.getElementById('player').volume = 0.1;
         $('#player').on('ended', function() {
           socket.emit('musiqueFini');

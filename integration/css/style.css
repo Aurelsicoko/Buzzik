@@ -110,6 +110,10 @@ img {
 
 /* GENERAL CSS */
 
+#all{
+	min-height: 100%;
+}
+
 .content{
 	max-width: 1050px;
 	margin: auto;
@@ -551,6 +555,11 @@ section p{
 
 .top>div:last-of-type{
 	width: 30%;
+}
+
+#jeu{
+	height: 100%;
+	background-color: #387ca5;
 }
 
 /* FOOTER CSS */

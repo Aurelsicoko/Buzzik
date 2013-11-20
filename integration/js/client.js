@@ -48,8 +48,9 @@ socket.on('connect', function () {
           }
         }
       }
-
+      console.log(room.params.listeJoueur);
       element = document.getElementById(room.params.listeJoueur);
+      console.log(element);
       if (typeof element != 'undefined' && element != null) {
         $('#'+room.params.listeJoueur).empty();
         for (j in room.usernames) {
@@ -104,7 +105,7 @@ socket.on('connect', function () {
     },
 
     played : function () {
-      document.getElementById(room.params.player).play();
+      player.play();
     },
 
     roomAdded : function () {
@@ -121,8 +122,8 @@ socket.on('connect', function () {
     musiqueLoaded : function () {
       document.getElementById(room.params.player).src = room.numTrack;
       if (room.etat == "play") {
-        document.getElementById(room.params.player).play();
-        document.getElementById(room.params.player).addEventListener('ended', function() {
+        player.play();
+        player.addEventListener('ended', function() {
           socket.emit('musiqueFini');
         });
       }
@@ -190,5 +191,5 @@ socket.on('refreshScrore', function () {
 });
 
 socket.on('roomDelete', function () {
-  document.location.href="index.html"; 
+  document.location.href="index.php"; 
 });
