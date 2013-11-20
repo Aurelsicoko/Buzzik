@@ -90,7 +90,7 @@ io.sockets.on('connection', function (socket) {
     });
 
     socket.on('buzz', function() {
-            if (!rooms[socket.room].buzz && rooms[socket.room].play) {
+            if (!rooms[socket.room].buzz && !rooms[socket.room].paused) {
                     rooms[socket.room].buzz = true;
                     socket.broadcast.to(socket.room).emit('buzz');
                     socket.emit('valideBuzz');
@@ -129,7 +129,7 @@ io.sockets.on('connection', function (socket) {
             socket.emit('afficherJoueur', usernames, socket.room, socket.numUser);
     });
 
-    socket.on('disconnect', function () {
+    socket.once('disconnect', function () {
             if (socket.numUser != '') {
                     delete usernames[socket.numUser];
                     socket.broadcast.to(socket.room).emit('refreshScrore');

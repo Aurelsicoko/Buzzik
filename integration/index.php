@@ -11,7 +11,6 @@
 <body>
 	<section id="listeJoueur"></section>
 	<section id="all">
-		<div id="buffer"></div>
 		<div id="rooms"></div>
 		<div id="dz-root"></div>
 		<div class="topBar">
@@ -336,6 +335,7 @@
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
 	<script type="text/javascript" src="http://localhost:1337/socket.io/socket.io.js"></script>
+	<script type="text/javascript" src="js/player.js"></script>
 	<script type="text/javascript" src="js/room.js"></script>
 	<script type="text/javascript" src="js/formulaire.js"></script>
 	<script type="text/javascript" src="js/client.js"></script>

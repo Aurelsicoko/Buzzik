@@ -84,7 +84,7 @@ socket.on('connect', function () {
       //$('#'+room.params.buzzer).remove();
       var element = document.getElementById(room.params.player);
       if (typeof element != 'undefined' && element != null) {
-        document.getElementById(room.params.player).pause();
+        player.pause();
       }
     },
 
@@ -120,12 +120,9 @@ socket.on('connect', function () {
     },
 
     musiqueLoaded : function () {
-      document.getElementById(room.params.player).src = room.numTrack;
-      if (room.etat == "play") {
+      player.setFile(room.numTrack);
+      if(room.etat == "play") {
         player.play();
-        player.addEventListener('ended', function() {
-          socket.emit('musiqueFini');
-        });
       }
     }
   }); 
