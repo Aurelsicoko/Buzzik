@@ -178,11 +178,8 @@ function connect(room){
                   var prenomUser = userInfo.first_name;
                   var nomUser = userInfo.last_name;
                   var avatarUser = "http://graph.facebook.com/"+userInfo.username+"/picture";
-                  if(userInfo.location.name)
-                    var paysUser = userInfo.location.name.split(",")[1];
-                  else
-                    if(userInfo.country)
-                      var paysUser = userInfo.country;
+                  
+                  var paysUser = "";
 
                   var ageUser = userInfo.birthday;
 
