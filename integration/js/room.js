@@ -181,8 +181,9 @@ function connect(room){
                   if(userInfo.location.name)
                     var paysUser = userInfo.location.name.split(",")[1];
                   else
-                    var paysUser = userInfo.country;
-                  
+                    if(userInfo.country)
+                      var paysUser = userInfo.country;
+
                   var ageUser = userInfo.birthday;
 
                   // If the user isn't subscribed, we subscribe him else we connect him
