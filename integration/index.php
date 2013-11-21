@@ -9,7 +9,6 @@
 	<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-	<section id="listeJoueur"></section>
 	<section id="all">
 		<div id="rooms"></div>
 		<div id="dz-root"></div>

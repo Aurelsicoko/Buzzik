@@ -104,6 +104,7 @@ io.sockets.on('connection', function (socket) {
             console.log(rooms[socket.room].buzz, rooms[socket.room].id);
             console.log(reponse +" / "+ rooms[socket.room].musiqueCourante);
             if(reponse.toLowerCase()  == rooms[socket.room].musiqueCourante.toLowerCase() ){
+                    console.log(rooms[socket.room].listeMusique.length + " / "+rooms[socket.room].nbrChanson)
                     if (rooms[socket.room].listeMusique.length != rooms[socket.room].nbrChanson) {
                             do {
                                     numTrack = Math.floor((Math.random()*(listMusiqueUrl.length-1))+1);
@@ -148,15 +149,14 @@ io.sockets.on('connection', function (socket) {
             }
     });
 
-    function Verif(a, liste){
-            var x = 0;
-            while(x < liste.length){
-                    if(liste[x] == a){
-                            return true;
-                    }
-                    x++;
+    function Verif(a, liste)
+    {
+        var x = 0;
+        while(x < liste.length){
+            if(liste[x] == a){
+                return false;
             }
+            x++;
+        }
     }
-
-
 });

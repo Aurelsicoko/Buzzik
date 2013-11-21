@@ -25,20 +25,30 @@ socket.on('connect', function () {
       
       console.log(room.monId);
 
-
+      var html = "", tour = 0;
       var element = document.getElementById(room.params.listeAllJoueur);
       if (typeof element != 'undefined' && element != null) {
         $('#'+room.params.listeAllJoueur).empty();
         for (i in room.usernames) {
           if (room.usernames[i] != null) {
             if (room.usernames[i].room == room.room) {
-              $('#'+room.params.listeAllJoueur).append('Nom : '+room.usernames[i].user+' Point : '+room.usernames[i].point+'<br>');
-            }
+              html += '<li class="online"><img src="images/avatar_example.png" /><h3>'+room.usernames[i].user+'</h3><p>'+room.usernames[i].point+'</p></li>';
+              tour++;
+            }  
           }
         }
+
+        var diff = 4-tour;
+        console.log(diff);
+        for(var i=0; i<diff; i++){
+          html += '<li class="online"><img src="images/avatar_example.png" /><h3>Non connecté</h3><p>0</p></li>';
+        }
+
+        $('#'+room.params.listeAllJoueur).html(html);
+
       }
       console.log(room.params.listeJoueur);
-      element = document.getElementById(room.params.listeJoueur);
+      element = $("#"+room.params.listeJoueur);
       console.log(element);
       if (typeof element != 'undefined' && element != null) {
         $('#'+room.params.listeJoueur).empty();
@@ -48,9 +58,10 @@ socket.on('connect', function () {
               $('#'+room.params.listeJoueur).append('Nom : '+room.usernames[j].user+' Point : '+room.usernames[j].point+'<br>');
             }
             if (j == room.monId) {
-              console.log($('#'+room.params.monScore));
-              $('#'+room.params.monScore).empty();
-              $('#'+room.params.monScore).append(room.usernames[room.monId].point);
+              var idScore = "#"+room.params.monScore;
+              setTimeout(function(){
+                 $(idScore).hide().html(room.usernames[j].point).fadeIn();
+              }, 1000)
             }
           }
         }
@@ -88,7 +99,6 @@ socket.on('connect', function () {
     },
 
     appendBuzzer : function () {
-      $('#'+room.params.buzzer).remove();
       $('#all').load("template/buzzer.html");
       $('link[rel=stylesheet]:last-of-type').attr("href", "css/mobile.css");
       console.log('refreshScrore')

@@ -69,6 +69,7 @@ player.init({
 		decompte = setInterval(function(){
 			var timeLeft = 30-player.media.currentTime;
 			if(timeLeft <= 5) $("#timer").addClass("caSentLaFin");
+			if(timeLeft == 0) player.end();
 			$("#timer").html(timeLeft.toFixed(1)+'"');
 		}, 100);
 
