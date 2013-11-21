@@ -96,9 +96,9 @@ var room = {
   },
 
   creerRoom : function () {
-    $("#reglages").remove();
+    $("#all").fadeOut();
 
-    alert("Créér une room de "+room.params.nbrJoueur+" joueur(s) au nom de "+room.params.nomPartie+" sur "+room.params.nbrChanson+" chansons !");
+    //alert("Créér une room de "+room.params.nbrJoueur+" joueur(s) au nom de "+room.params.nomPartie+" sur "+room.params.nbrChanson+" chansons !");
 
     /***************************************/
 
@@ -110,6 +110,7 @@ var room = {
       var playListUrl = a.split(',');
       var playListTitle = b.split(',');
       $('#all').load("template/jeu.html", function(){
+        $("#all").fadeIn();
         $('link[rel=stylesheet]:last-of-type').attr("href", "css/jeu.css");
         socket.emit('playerPret', {url: playListUrl, title: playListTitle});
       });

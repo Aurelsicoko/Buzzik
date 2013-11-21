@@ -120,6 +120,7 @@ socket.on('connect', function () {
     },
 
     musiqueLoaded : function () {
+      $("path").fadeOut(500, function(){ $(this).remove(); });
       player.setFile(room.numTrack);
       if(room.etat == "play") {
         player.play();

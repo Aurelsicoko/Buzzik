@@ -90,8 +90,6 @@ player.init({
 		$("#timer").removeClass("caSentLaFin");
 		$("#timer").html('0');
 		socket.emit('musiqueFini');
-		player.setFile("http://www.google.fr"); /* ICI NOUVEAU FICHIER */
-		player.load();
 	}
 });
 
