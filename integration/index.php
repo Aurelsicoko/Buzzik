@@ -333,7 +333,7 @@
 	<script src="http://cdn-files.deezer.com/js/min/dz.js"></script>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
-	<script type="text/javascript" src="http://localhost:1337/socket.io/socket.io.js"></script>
+	<script type="text/javascript" src="http://<?php echo $_SERVER['HTTP_HOST']; ?>:1337/socket.io/socket.io.js"></script>
 	<script type="text/javascript" src="js/player.js"></script>
 	<script type="text/javascript" src="js/room.js"></script>
 	<script type="text/javascript" src="js/formulaire.js"></script>

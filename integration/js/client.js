@@ -1,4 +1,4 @@
-var socket = io.connect('http://localhost:1337');
+var socket = io.connect('http://'+location.hostname+':1337');
 
 socket.on('connect', function () {
 
