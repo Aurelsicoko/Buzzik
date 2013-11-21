@@ -71,7 +71,9 @@ socket.on('connect', function () {
 
     emitBuzzed : function () {
       $('#all').load("template/formulaire.html", function () {
-        $('#'+room.params.titre).focus();
+        setTimeout(function(){
+           $('#'+room.params.titre).focus();
+        },500);
         $('#'+room.params.form).submit(function (e) {
           e.preventDefault();
           room.envoiReponse($('#'+room.params.titre).val());
