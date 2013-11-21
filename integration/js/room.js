@@ -172,13 +172,17 @@ function connect(room){
               if(response.status === 'connected'){
               // connected
               FB.api('/me', function(userInfo) {
-                console.log("Yeah");
+                  console.log(userInfo);
                   // Get all user informations
                   var emailUser = userInfo.email;
                   var prenomUser = userInfo.first_name;
                   var nomUser = userInfo.last_name;
                   var avatarUser = "http://graph.facebook.com/"+userInfo.username+"/picture";
-                  var paysUser = userInfo.location.name.split(",")[1];
+                  if(userInfo.location.name)
+                    var paysUser = userInfo.location.name.split(",")[1];
+                  else
+                    var paysUser = userInfo.country;
+                  
                   var ageUser = userInfo.birthday;
 
                   // If the user isn't subscribed, we subscribe him else we connect him
@@ -213,9 +217,10 @@ function connect(room){
           function login(_self) {
               FB.login(function(response) {
                 if (response.authResponse) {
+                  console.log(response);
                       // connected
                     FB.api('/me', function(userInfo) {
-                      console.log("Yeah");
+                      console.log(userInfo);
                       // Get all user informations
                       var emailUser = userInfo.email;
                       var prenomUser = userInfo.first_name;
