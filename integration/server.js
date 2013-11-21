@@ -102,6 +102,7 @@ io.sockets.on('connection', function (socket) {
             rooms[socket.room].buzz = false;
             rooms[socket.room].play = true;
             console.log(rooms[socket.room].buzz, rooms[socket.room].id);
+            console.log(reponse +" / "+ rooms[socket.room].musiqueCourante);
             if(reponse.toLowerCase()  == rooms[socket.room].musiqueCourante.toLowerCase() ){
                     if (rooms[socket.room].listeMusique.length != rooms[socket.room].nbrChanson) {
                             do {
@@ -129,14 +130,20 @@ io.sockets.on('connection', function (socket) {
             socket.emit('afficherJoueur', usernames, socket.room, socket.numUser);
     });
 
-    socket.once('disconnect', function () {
-            if (socket.numUser != '') {
+    socket.on('disconnect', function () {
+        console.log(socket);
+            if (socket.numUser != undefined) {
+                    socket.join("accueil");
                     delete usernames[socket.numUser];
+                    socket.numUser = undefined;
                     socket.broadcast.to(socket.room).emit('refreshScrore');
             }
-            if (socket.numRoom != '') {
+            if (socket.numRoom != undefined) {
+                    socket.join("accueil");
                     delete rooms[socket.numRoom];
+                    socket.numRoom = undefined;
                     socket.broadcast.to(socket.room).emit('roomDelete');
+                    console.log("OK");
                     io.sockets.to('accueil').emit('afficherLesRoomsExistante', rooms)
             }
     });

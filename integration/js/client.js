@@ -2,17 +2,6 @@ var socket = io.connect('http://localhost:1337');
 
 socket.on('connect', function () {
 
-
-  /*if (typeof location.search != 'undefined'){
-    var getRoom = location.search.split('=');
-    if(!isNaN(getRoom) && getRoom!=''){
-      console.log('coucou')
-      room.rejoindreRoom(getRoom);
-    }
-  }*/
-
-
-
   room.init({
     player : 'player',
     buzzer : 'buzzer',
@@ -61,7 +50,7 @@ socket.on('connect', function () {
             if (j == room.monId) {
               console.log($('#'+room.params.monScore));
               $('#'+room.params.monScore).empty();
-              $('#'+room.params.monScore).append('Point : '+room.usernames[room.monId].point);
+              $('#'+room.params.monScore).append(room.usernames[room.monId].point);
             }
           }
         }
@@ -131,8 +120,8 @@ socket.on('connect', function () {
   }); 
 
   console.log(typeof location.search);
-  if (typeof location.search != '' && location.search != ''){
-    var getRoom = location.search.split('=');
+  if (typeof window.location.search != '' && window.location.search != ''){
+    var getRoom = window.location.search.split('=');
     if(!isNaN(getRoom[1]) && getRoom[1]!=''){
       room.rejoindreRoom(getRoom[1]);
     }

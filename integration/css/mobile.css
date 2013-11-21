@@ -175,6 +175,8 @@ section #all{
 	font-weight: bold;
 }
 
+
+
 .container div>div:last-of-type{
 	position: absolute;
 	overflow: hidden;
@@ -239,6 +241,10 @@ section #all{
 	font-size: .8em;
 	text-align: center;
 	color: white;
+}
+
+.bg_bottom .categorie #monScore{
+	font-size: 2em;
 }
 
 .bottom .categorie h1{
