@@ -178,11 +178,9 @@ section #all{
 
 
 .container div>div:last-of-type{
-	position: absolute;
 	overflow: hidden;
 	width: 100%;
 	height: auto;
-	bottom: .5em;
 	padding: .2em;
 }
 
@@ -203,7 +201,8 @@ section #all{
 .container #buzzer p{
 	font-size: 2.5em;
 	font-weight: bold;
-	height: 60%;
+	height: 100%;
+	display: block;
 	padding-top: 40%;
 	text-shadow: 1px 1px 0px #000;
 	background-image: url('../images/bg_buzzer.png');
