@@ -2,7 +2,8 @@
 <html>
 <head>
 	<meta charset="utf8">
-	<meta name="viewport" content="width=device-width,initial-scale=1" /> 
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="viewport" content="width=device-width,initial-scale=1" />
 	<title>Buzzik - Open your mind</title>
 	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
 	<link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.3.0/grids-min.css">
@@ -339,7 +340,6 @@
 	<script type="text/javascript" src="js/formulaire.js"></script>
 	<script type="text/javascript" src="js/client.js"></script>
 	<script>
-
 	$("#choisirNbrJoueur img").click(function () {
 		
 		console.log(room.params.nbrJoueur);

@@ -16,7 +16,7 @@ socket.on('connect', function () {
       $('#'+room.params.affichage).empty();
       for (i in room.rooms) {
         if (room.rooms[i] != null) {
-          $('#'+room.params.affichage).append('<div><a href="#" onclick="room.rejoindreRoom(\''+room.rooms[i].id+'\')">' + room.rooms[i].nom + '</a></div>');
+          $('#'+room.params.affichage).append('<div><a href="./?room='+room.rooms[i].id+'">' + room.rooms[i].nom + '</a></div>');
         }
       }
     },
@@ -132,6 +132,8 @@ socket.on('connect', function () {
   console.log(typeof location.search);
   if (typeof window.location.search != '' && window.location.search != ''){
     var getRoom = window.location.search.split('=');
+    getRoom[1] = parseInt(getRoom[1]);
+
     if(!isNaN(getRoom[1]) && getRoom[1]!=''){
       room.rejoindreRoom(getRoom[1]);
     }

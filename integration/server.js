@@ -39,7 +39,6 @@ io.sockets.on('connection', function (socket) {
 	});
 
 	socket.on('rejoindreRoom', function(room, nom){
-        socket.emit('message', room);
 		if (rooms[room] != null) {
             var nbrPlayerPartie = 0;
             for (k in usernames) {

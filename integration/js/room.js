@@ -96,7 +96,7 @@ var room = {
   },
 
   creerRoom : function () {
-    $("#all").fadeOut();
+    $("#all").fadeOut().hide();
 
     //alert("Créér une room de "+room.params.nbrJoueur+" joueur(s) au nom de "+room.params.nomPartie+" sur "+room.params.nbrChanson+" chansons !");
 
@@ -110,7 +110,7 @@ var room = {
       var playListUrl = a.split(',');
       var playListTitle = b.split(',');
       $('#all').load("template/jeu.html", function(){
-        $("#all").fadeIn();
+        $("#all").fadeIn().show();
         $('link[rel=stylesheet]:last-of-type').attr("href", "css/jeu.css");
         socket.emit('playerPret', {url: playListUrl, title: playListTitle});
       });
@@ -213,9 +213,13 @@ function connect(room){
             });
 
           function login(_self) {
-              FB.login(function(response) {
+            var urlRedirect = document.URL;
+            window.location = "https://m.facebook.com/dialog/oauth?client_id=205528932959370&response_type=code&redirect_uri=" + urlRedirect + "&scope=email,user_birthday";
+              /*FB.login(function(response) {
+                alert(response);
                 if (response.authResponse) {
                   console.log(response);
+
                       // connected
                     FB.api('/me', function(userInfo) {
                       console.log(userInfo);
@@ -235,7 +239,7 @@ function connect(room){
                           /*data.buzzer = eval('(' + data.buzzer + ')');
                           var nomBuzzer = data.buzzer.nomBuzzer;
                           var sonnerieBuzzer = data.buzzer.sonnerieBuzzer;*/
-                          var nom = prenomUser+' '+nomUser;
+                          /*var nom = prenomUser+' '+nomUser;
 
                           socket.emit('rejoindreRoom', room, nom);
                         }
@@ -248,7 +252,7 @@ function connect(room){
                 } else {
                       // cancelled
                   }
-              },{scope: 'email,user_birthday'});
+              },{scope: 'email,user_birthday'}); */
           }
 
         /*}
