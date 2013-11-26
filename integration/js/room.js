@@ -1,5 +1,6 @@
 var room = {
 
+  // Définition des variables et callback de l'obj room
   defaults : {
     player : '',
     buzzer : '',
@@ -8,6 +9,7 @@ var room = {
     titre : '',
     listMusiqueUrl: '',
     listMusiqueTitle : '',
+    listeMusique : '',
 
     emitBuzzed : function () {},
     onBuzzed : function () {},
@@ -16,55 +18,84 @@ var room = {
     appendBuzzer : function () {},
     played : function () {},
     roomAdded : function () {},
-    roomJoined : function () {},
     musiqueLoaded : function () {},
     roomListed : function () {},
-    playerListed : function () {}
+    playerListed : function () {},
+    musiqueListed: function () {}
   },
 
+  // Merge des infos rempli côté utilisateur et obj
   init : function (options) {
     this.params = $.extend(this.defaults, options);
   },
 
+  // Liste des rooms (ARRAY)
+  // mise en mémoire des rooms
+  // active le callback pour lister les rooms
   listeRoom : function (rooms) {
     this.rooms = rooms;
     this.params.roomListed.call(this);
   },
 
+  // Connection à une room (INT)
+  // appelle la fonction pour se connecter à la room
   rejoindreRoom : function (room){
-    console.log("Room n°"+room);
     connect(room);
   },
 
+  // L'utilisateur à bien rejoin une room
+  // active le callback pour kill l'accueil
   roomAjoute : function () {
     this.params.roomAdded.call(this);
   },
 
+  // L'utilisateur à rejoin une room 
+  // test si l'élément player existe
+  // si 'non'
+    // active le callback d'affichage du buzzer
   roomRejoint : function () {
-    var element = document.getElementById(room.params.player);
+    var element = document.querySelector(room.params.player);
     if (typeof element == 'undefined' || element == null) {
-      this.params.roomJoined.call(this);
+      this.params.appendBuzzer.call(this);
     }
   },
 
+  // Affichage des joueurs
+  // active le callback d'affichage des joueurs
   afficherJoueur : function () {
     this.params.playerListed.call(this);
   },
 
-  emitBuzz : function () {
-    socket.emit('buzz');
-    console.log("emitbuzz");
+  // Affichage des musiques jouées
+  // active le callback d'affichage des musiques jouées
+  afficherMusique : function () {
+    this.params.musiqueListed.call(this);
   },
 
+  // Envoie du buzz
+  // envoie au server le fait que l'utilisateur à buzzé
+  emitBuzz : function () {
+    socket.emit('buzz');
+  },
+
+  // Le buzz à été validé côté server
+  // active le callback qui affiche le formulaire de réponse
   valideBuzz : function () {
-    console.log('exe');
     this.params.emitBuzzed.call(this);
   },
 
+  // Un utilisateur à buzzé dans la room
+  // active le callback mettant en pse le player
   onBuzz : function () {
     this.params.onBuzzed.call(this);
   },
 
+  // Reception de la réponse
+  // test si elle est vide
+  // si 'oui'
+    // active le callback pour annoncer que la réponse est vide
+  // si 'non'
+    // active le callback pour afficher le buzzer
   envoiReponse : function (titre) {
      if(titre == ''){
         this.params.emptyAnswer.call(this);
@@ -73,8 +104,16 @@ var room = {
       }
   },
 
+  // Affiche le buzer
+  // test si l'élément player existe
+  // si 'non'
+    // active le callback d'affichage du buzer
+    // active le callback l'affichage des joueurs et scores
+  // si 'non'
+    // active le callback pour mettre play la musiqe
+    // active le callback pour afficher les joueurs et scores
   afficherBuzzer : function () {
-    var element = document.getElementById(room.params.player);
+    var element = document.querySelector(room.params.player);
     if (typeof element == 'undefined' || element == null) {
       this.params.appendBuzzer.call(this);
       this.params.playerListed.call(this);
@@ -84,10 +123,17 @@ var room = {
     }
   },
 
+  // Mettre en place la prochaine musique (INT, STRING)
+  // mise en memoir des infos
+  // test si m'élément player existe
+  // si 'oui'
+    // active le callback pour changer la musique
+  // si 'non'
+    // active le callback pour afficher le buzzer
   prochaineMusique : function (numTrack, etat) {
     this.etat = etat;
     this.numTrack = numTrack;
-    var element = document.getElementById(this.params.player);
+    var element = document.querySelector(this.params.player);
     if (typeof element != 'undefined' && element != null) {
       this.params.musiqueLoaded.call(this);
     }else{
@@ -95,34 +141,50 @@ var room = {
     }
   },
 
+  // Création d'une room
   creerRoom : function () {
     $("#all").fadeOut().hide();
 
-    //alert("Créér une room de "+room.params.nbrJoueur+" joueur(s) au nom de "+room.params.nomPartie+" sur "+room.params.nbrChanson+" chansons !");
 
     /***************************************/
 
+    // Envoie au server des info de la partie pour qu'il crée la room
     socket.emit('ajouterRoom', room.params.nomPartie, room.params.nbrJoueur, room.params.nbrChanson);
 
     /***************************************/
 
-    function GetPlayList(a, b){
+    // Création de la playlist et envoie au server des infos
+    function GetPlayList(a, b, c, d){
       var playListUrl = a.split(',');
       var playListTitle = b.split(',');
+      var playListArt = c.split(',');
+      var playListCov = d.split(',');
       $('#all').load("template/jeu.html", function(){
-        $("#all").fadeIn().show();
-        $('link[rel=stylesheet]:last-of-type').attr("href", "css/jeu.css");
-        socket.emit('playerPret', {url: playListUrl, title: playListTitle});
+        
+        setTimeout(function(){
+
+          $.event.trigger({
+            type: "chargementJeu",
+            message: "",
+            time: new Date()
+          });
+
+          $("#all").fadeIn().show();
+          $('link[rel=stylesheet]:last-of-type').attr("href", "css/jeu.css");
+          socket.emit('playerPret', {url: playListUrl, title: playListTitle, artist: playListArt, cover: playListCov});
+
+        }, 500)        
       });
     }
 
+    // Récupération des infos utile de chaque musique de la playlist deezer
     function GetUrlObjet(o) {
         for (i in o) {
             if (typeof(o[i])=="object") {
-              console.log(o[i].preview);
-              console.log(o[i].title);
               room.params.listMusiqueUrl = room.params.listMusiqueUrl + "," + o[i].preview;
               room.params.listMusiqueTitle = room.params.listMusiqueTitle + "," + o[i].title;
+              room.params.listMusiqueArtist = room.params.listMusiqueArtist + "," + o[i].artist.name;
+              room.params.listMusiqueCover = room.params.listMusiqueCover + "," + o[i].album.cover;
             }
         }
     }
@@ -135,18 +197,17 @@ var room = {
       }
     });
 
-    DZ.api('playlist/641035645', function(response){
-      console.log(response.tracks.data);
+    DZ.api('playlist/589406715', function(response){
       //Je récupére l'objet contenant la liste objet de chaque musique
       GetUrlObjet(response.tracks.data);
       //Je transforme mes bojets en deux tableau urlMP3 et Titre
-      GetPlayList(room.params.listMusiqueUrl, room.params.listMusiqueTitle)
+      GetPlayList(room.params.listMusiqueUrl, room.params.listMusiqueTitle, room.params.listMusiqueArtist, room.params.listMusiqueCover)
     });
   }
 
 }
   
-
+// Connection à une room via avec FBconnect
 function connect(room){
 
       FB.init({

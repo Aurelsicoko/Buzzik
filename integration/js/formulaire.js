@@ -76,3 +76,52 @@ var formulaire = {
   },
 
 }
+
+$("#choisirNbrJoueur img").click(function () {
+    
+    console.log(room.params.nbrJoueur);
+  });
+  // Boutton "Commencer la partie"
+  $('a[href=#multiple_player]').on('click', function(e){
+    e.preventDefault();
+    room.params.nomPartie = $("#reglages input[name=nomPartie]").val();
+    room.params.nbrJoueur = parseInt($("#choisirNbrJoueur").data("nbrjoueur"));
+    room.params.nbrChanson = parseInt($("#reglages #amount2").val());
+
+    room.creerRoom();
+  });
+
+  // Scroll vers la création d'une room
+  $('a[href=#jouer]').on('click', function(e){
+    e.preventDefault();
+    $('html,body').animate({scrollTop: $("#jouer").offset().top},'slow');
+  });
+
+  // Click boutton connection en haut de page
+  $('a[href=#connecter]').on('click', function(e){
+    e.preventDefault();
+    var div = $('.topBar ul:last-of-type');
+    if(div.attr('class') == 'off' || div.attr('class') == 'animated bounceOutUp'){
+      div.addClass('animated').addClass('bounceInDown').removeClass('off').removeClass('bounceOutUp');
+    }
+    else{
+      div.addClass('bounceOutUp').removeClass('display').removeClass('bounceInDown');
+    }
+    var largeurPage = (document.body.clientWidth);
+    var offset = $(this).parent().prev().children().offset();
+    var pourcentage = offset.left*100/largeurPage;
+
+    div.css({left:pourcentage+"%"});
+  });
+
+  // Gestion de la jauge de chasson
+  $( "#nbrChanson" ).slider({
+        range: "min",
+        value: 15,
+        min: 5,
+        max: 50,
+        slide: function( event, ui ) {
+          $( "#amount" ).val(ui.value);
+        }
+  });
+  $( "#amount" ).val($( "#nbrChanson" ).slider( "value" ));

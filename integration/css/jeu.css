@@ -231,11 +231,11 @@ section #all{
 	vertical-align: 150%;
 }
 
-.titres li>p:last-of-type{
+/*.titres li>p:last-of-type{
 	width: 5%;
 	vertical-align: 200%;
 	text-align: right;
-}
+}*/
 
 .lePlayer{
 	width: 100%;

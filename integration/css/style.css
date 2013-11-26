@@ -373,6 +373,7 @@ section p{
  
 .video-container iframe,
 .video-container object,
+.video-container video,
 .video-container embed {
     position: absolute;
     top: 0;
@@ -1065,6 +1066,10 @@ section:last-of-type:not(#all) p{
 		width: 93%;
 	}
 
+	.top .score img{
+		vertical-align: -150%;
+	}
+
 	footer .pure-g-r:last-of-type div{
 		width: 50%;
 		float: left;
@@ -1081,6 +1086,22 @@ section:last-of-type:not(#all) p{
 		text-align: center;
 	}
 
+}
+
+@media (max-width: 1075px){
+	.content{
+		max-width: 800;
+	}
+
+	.top .score img{
+		width: 20%;
+		height: auto;
+		vertical-align: 0;
+	}
+
+	.top .score>div {
+		width: 70%;
+	}
 }
 
 .pace {
