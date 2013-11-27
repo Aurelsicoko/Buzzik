@@ -88,7 +88,7 @@ $("#choisirNbrJoueur img").click(function () {
     room.params.nbrJoueur = parseInt($("#choisirNbrJoueur").data("nbrjoueur"));
     room.params.nbrChanson = parseInt($("#reglages #amount2").val());
 
-    room.creerRoom();
+    room.creerRoom(prompt("Please enter the email adresses separate by a coma"));
   });
 
   // Scroll vers la création d'une room

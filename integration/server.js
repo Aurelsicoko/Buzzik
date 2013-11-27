@@ -5,6 +5,9 @@ var express = require('express')
   , io = require('socket.io').listen(server);
 
 
+var timerSong;
+
+
 server.listen(1337);	
 
 // liste des utilisateur
@@ -38,13 +41,15 @@ io.sockets.on('connection', function (socket) {
     // ajout à la room céé
     // envoie à l'utilisateur qu'il vient de créer un room
     // envoie aux utilisateurs qui n'ont pas rejoin de partie, qu'une nouvelle vien d'être créé 
-	socket.on('ajouterRoom', function (nomPartie, nbrJoueur, nbrChanson){
+	socket.on('ajouterRoom', function (nomPartie, nbrJoueur, nbrChanson, listeEmails){
 		var newRoom = {id: numRoom, nom: nomPartie, nbrJoueur: nbrJoueur, nbrChanson: nbrChanson, listeMusique: [], play: false, buzz: true};
         socket.room = numRoom;
         socket.numRoom = numRoom;
         rooms[socket.numRoom] = newRoom;
         socket.join(socket.room);
-        socket.emit('roomAjoute');
+
+        /* Envoi des emails aux personnes */
+        socket.emit('roomAjoute', { idRoom : socket.numRoom, listeEmails : listeEmails });
         socket.broadcast.to('accueil').emit('afficherLesRoomsExistante', rooms);
         numRoom++;
 	});
@@ -102,6 +107,7 @@ io.sockets.on('connection', function (socket) {
         rooms[socket.room].listeMusique.push(numTrack);
         rooms[socket.room].musiqueCourante = listMusiqueTitle[numTrack];
         socket.emit('prochaineMusique', listMusiqueUrl[numTrack], 'pause');
+        rooms[socket.room].timer = 0;
     });
 
     // Début de partie
@@ -109,6 +115,9 @@ io.sockets.on('connection', function (socket) {
     socket.on('debutPartie', function (){
         rooms[socket.room].play = true;
         rooms[socket.room].buzz = false;
+        timerSong =  setInterval(function(){
+            rooms[socket.room].timer += 0.1;
+        }, 100);
     });
 
     // Met en pause la partie
@@ -116,6 +125,7 @@ io.sockets.on('connection', function (socket) {
     socket.on('pausePartie', function (){
         rooms[socket.room].play = false;
         rooms[socket.room].buzz = true;
+        clearInterval(timerSong);
     });
     // Fin automatique de la musique si elle n'a pas été trouvé
     // test si il y a encore une musique à jouer pour la partie
@@ -148,6 +158,7 @@ io.sockets.on('connection', function (socket) {
             rooms[socket.room].listeMusique.push(numTrack);
             rooms[socket.room].musiqueCourante = listMusiqueTitle[numTrack];
             io.sockets.to(socket.room).emit('prochaineMusique', listMusiqueUrl[numTrack], 'play');
+            rooms[socket.room].timer = 0;
         }else{
                 io.sockets.to(socket.room).emit('roomDelete');
 
@@ -216,11 +227,13 @@ io.sockets.on('connection', function (socket) {
                 }while(verif);
                 rooms[socket.room].listeMusique.push(numTrack);
                 rooms[socket.room].musiqueCourante = listMusiqueTitle[numTrack];
-                usernames[socket.numUser].point += 100;
+
+                usernames[socket.numUser].point += Math.ceil(100-(50/(30/rooms[socket.room].timer)));
                 io.sockets.to(socket.room).emit('refreshScrore');
                 io.sockets.to(socket.room).emit('prochaineMusique', listMusiqueUrl[numTrack], 'play');
+                rooms[socket.room].timer = 0;
             }else{
-                usernames[socket.numUser].point += 100;
+                usernames[socket.numUser].point += Math.ceil(100-(50/(30/rooms[socket.room].timer)));
                 io.sockets.to(socket.room).emit('message', 'Fin de la partie');
                 io.sockets.to(socket.room).emit('roomDelete');
 
@@ -258,6 +271,7 @@ io.sockets.on('connection', function (socket) {
             }
             if (socket.numRoom != undefined) {
                     socket.join("accueil");
+                    clearInterval(timerSong);
                     delete rooms[socket.numRoom];
                     socket.numRoom = undefined;
                     socket.broadcast.to(socket.room).emit('roomDelete');
