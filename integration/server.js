@@ -177,7 +177,7 @@ io.sockets.on('connection', function (socket) {
         if (!rooms[socket.room].buzz && rooms[socket.room].play) {
             rooms[socket.room].buzz = true;
             rooms[socket.room].play = false;
-            socket.broadcast.to(socket.room).emit('buzz');
+            socket.broadcast.to(socket.room).emit('buzz', socket.numUser);
             socket.emit('valideBuzz');
         }
     });

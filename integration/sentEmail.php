@@ -2,8 +2,6 @@
 <body>
 <?php
 
-require_once 'lib/swift_required.php';
-
 $idRoom = $_POST['id'];
 $listeEmails = $_POST['listeEmails'];
 

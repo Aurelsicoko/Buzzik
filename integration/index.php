@@ -88,7 +88,7 @@
 			<div class="pure-g-r">
 
 			    <div class="pure-u-1-2 video-container l-box">
-				    	<video controls autobuffer>
+				    	<video controls autobuffer id="video">
 				    		 <source src="video/motion_presentation.mp4" type="video/mp4">
 				    		 Your browser does not support the video tag.
 				    	</video>

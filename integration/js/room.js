@@ -57,7 +57,7 @@ var room = {
       url: "sentEmail.php",
       data: { id : idRoom, listeEmails: listeEmails},
       success : function(data){
-        alert(data);
+        
       }
     })
   },
@@ -99,8 +99,8 @@ var room = {
 
   // Un utilisateur à buzzé dans la room
   // active le callback mettant en pse le player
-  onBuzz : function () {
-    this.params.onBuzzed.call(this);
+  onBuzz : function (data) {
+    this.params.onBuzzed.call(this, data);
   },
 
   // Reception de la réponse

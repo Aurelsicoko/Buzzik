@@ -110,6 +110,14 @@ section #all{
 	margin-bottom: 1em;
 }
 
+.borderRed{
+	border: 4px solid #e84c3d;
+}
+
+.borderWhite{
+	border: 4px solid white;
+}
+
 /* GENERAL CSS */
 
 .content{
@@ -161,7 +169,6 @@ section #all{
 
 #jeu .score li img{
 	width: 6em;
-	border: 4px solid white;
 }
 
 #jeu .score h3{
