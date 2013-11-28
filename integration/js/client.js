@@ -1,4 +1,5 @@
 var socket = io.connect('http://buzzik.local:1337/');
+var audio = new Audio("sound/banzai.mp3");
 
 socket.on('connect', function () {
 
@@ -60,7 +61,7 @@ socket.on('connect', function () {
 
         var diff = 4-tour;
         for(var i=0; i<diff; i++){
-          html += '<li class="online"><img class="borderWhite" src="images/avatar_example.png" /><h3>Non connecté</h3><p>0</p></li>';
+          html += '<li class="online"><img class="borderWhite" src="images/avatar_example.png" /><h3>Offline</h3><p>0</p></li>';
         }
 
         $(room.params.listeAllJoueur).html(html);
@@ -107,10 +108,7 @@ socket.on('connect', function () {
     // focus du champ de réponse
     // écoute de l'envoie de la réponse
     emitBuzzed : function () {
-      var audio = document.getElementById('audio');
-      audio.load();
       $('#all').load("template/formulaire.html", function () {
-        audio.play();
         setTimeout(function(){
            $(room.params.titre).focus();
         },500);
@@ -165,10 +163,10 @@ socket.on('connect', function () {
 
     // Musique bien chargé
     musiqueLoaded : function () {
-      $("path").fadeOut(500, function(){ $(this).remove(); });
       player.setFile(room.numTrack);
       if(room.etat == "play") {
         player.play();
+        $("path").remove();
       }
     }
   }); 
@@ -230,13 +228,18 @@ socket.on('afficherJoueur', function (usernames, rooms, monId) {
 // Changement de musique du player (INT, STRING)
 // active la fonction de l'obj room qui change la musique du player
 socket.on('prochaineMusique', function(numTrack, etat){
-  room.prochaineMusique(numTrack, etat)
+  room.prochaineMusique(numTrack, etat);
 });
 
 // Reception d'un buz dans la room
 // active la fonction de l'objet room qui met en pause le player
 socket.on('buzz', function (data) {
   room.onBuzz(data);
+  if(audio != null){
+    audio.play();
+    audio = null;
+  }
+  
 });
 
 // Validation du buzz

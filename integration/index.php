@@ -17,22 +17,22 @@
 		<div class="topBar">
 			<div class="pure-g-r content">
 				    <div class="pure-u-1-2">
-				    	<a href="http://www.facebook.fr" title="Facebook"><img src="images/icon_facebook.png" alt="Logo Facebook" /></a>
-				    	<a href="http://www.twitter.fr" title="Twitter"><img src="images/icon_twitter.png" alt="Logo Twitter" /></a>
+				    	<a href="https://www.facebook.com/buzzikfr" target="_blank" title="Facebook"><img src="images/icon_facebook.png" alt="Logo Facebook" /></a>
+				    	<a href="https://twitter.com/Buzzikfr" target="_blank" title="Twitter"><img src="images/icon_twitter.png" alt="Logo Twitter" /></a>
 				    </div>
 				    <div class="pure-u-1-2 alignRight">
 				    	<ul>
 				    		<li><img src="images/icon_player_small.png" /></li>
-				    		<li><a href="#connecter" title="Se connecter">Connexion</a></li>
+				    		<li><a href="#connecter" title="Se connecter">Log on</a></li>
 				    		<li>|</li>
 				    		<li><img src="images/icon_pen.png" /></li>
-				    		<li><a href="" title="S'inscrire">Inscription</a></li>
+				    		<li><a href="" title="S'inscrire">Sign up</a></li>
 				    	</ul>
 				    	<ul class="off">
-				    		<li><input type="text" name="login" placeholder="Identifiant" /></li>
-				    		<li><input type="password" name="pwd" placeholder="Mot de passe" /></li>
+				    		<li><input type="text" name="login" placeholder="Login" /></li>
+				    		<li><input type="password" name="pwd" placeholder="Password" /></li>
 				    		<li><input type="submit" name="connexion" value="Connexion" /></li>
-				    		<li><a href="#"><img src="images/icon_logo_fb.png" />Connexion via Facebook</a></li>
+				    		<li><a href="#"><img src="images/icon_logo_fb.png" />Connect by Facebook</a></li>
 				    	</ul>
 				    </div>
 				</div> 
@@ -46,9 +46,9 @@
 			    </div>
 			    <div class="pure-u-1-2 alignRight">
 			    	<ul>
-			    		<li><a href="./" title="Retourner à l'accueil" class="hover">Accueil</a></li>
-			    		<li><a href="" title="Jouer">Jouer</a></li>
-			    		<li><a href="" title="Communauté">Communauté</a></li>
+			    		<li><a href="./" title="Retourner à l'accueil" class="hover">Home</a></li>
+			    		<li><a href="#jouer" title="Jouer">Play</a></li>
+			    		<li><a href="#community" title="Communauté">Community</a></li>
 			    	</ul>
 			    </div>
 
@@ -67,7 +67,7 @@
 						With your family or friends fall into the musical world of Buzzik. It's crazy, fun and music !
 						</p>
 				    	
-				    	<a class="btn alignRight marginTop" href="#jouer" title="Jouer dès maintenant">Jouer !</a>
+				    	<a class="btn alignRight marginTop" href="#jouer" title="Jouer dès maintenant">Play now !</a>
 				    </div>	
 			    </div>
 			    <div class="pure-u-1-2 alignRight animated slideInRight">
@@ -174,7 +174,7 @@
 
 			</div>
 		</section>
-		<section class="top marginTop">
+		<section class="top marginTop" id="community">
 			<div class="pure-g-r content">
 				 <div class="pure-u-1 titleDivision">
 					<h2 id="h2titleDivision">COMMUNITY</h2>

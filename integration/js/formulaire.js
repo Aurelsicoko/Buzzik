@@ -97,6 +97,11 @@ $("#choisirNbrJoueur img").click(function () {
     $('html,body').animate({scrollTop: $("#jouer").offset().top},'slow');
   });
 
+  $('a[href=#community]').on('click', function(e){
+    e.preventDefault();
+    $('html,body').animate({scrollTop: $("#community").offset().top},'slow');
+  });
+
   // Click boutton connection en haut de page
   $('a[href=#connecter]').on('click', function(e){
     e.preventDefault();

@@ -106,6 +106,7 @@ io.sockets.on('connection', function (socket) {
         numTrack = Math.floor((Math.random()*(listMusiqueTitle.length-1))+1);
         rooms[socket.room].listeMusique.push(numTrack);
         rooms[socket.room].musiqueCourante = listMusiqueTitle[numTrack];
+        console.log(rooms[socket.room].musiqueCourante+" / "+listMusiqueArtist[numTrack]);
         socket.emit('prochaineMusique', listMusiqueUrl[numTrack], 'pause');
         rooms[socket.room].timer = 0;
     });
@@ -228,11 +229,21 @@ io.sockets.on('connection', function (socket) {
                 rooms[socket.room].listeMusique.push(numTrack);
                 rooms[socket.room].musiqueCourante = listMusiqueTitle[numTrack];
 
+                if(rooms[socket.room].timer > 29){
+                    rooms[socket.room].timer = 29;
+                }
+                    
+
                 usernames[socket.numUser].point += Math.ceil(100-(50/(30/rooms[socket.room].timer)));
                 io.sockets.to(socket.room).emit('refreshScrore');
                 io.sockets.to(socket.room).emit('prochaineMusique', listMusiqueUrl[numTrack], 'play');
                 rooms[socket.room].timer = 0;
             }else{
+
+                if(rooms[socket.room].timer > 29){
+                    rooms[socket.room].timer = 29;
+                }
+
                 usernames[socket.numUser].point += Math.ceil(100-(50/(30/rooms[socket.room].timer)));
                 io.sockets.to(socket.room).emit('message', 'Fin de la partie');
                 io.sockets.to(socket.room).emit('roomDelete');

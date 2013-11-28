@@ -169,10 +169,6 @@ var room = {
 
     // Création de la playlist et envoie au server des infos
     function GetPlayList(a, b, c, d){
-      var playListUrl = a.split(',');
-      var playListTitle = b.split(',');
-      var playListArt = c.split(',');
-      var playListCov = d.split(',');
       $('#all').load("template/jeu.html", function(){
         
         setTimeout(function(){
@@ -185,7 +181,7 @@ var room = {
 
           $("#all").fadeIn().show();
           $('link[rel=stylesheet]:last-of-type').attr("href", "css/jeu.css");
-          socket.emit('playerPret', {url: playListUrl, title: playListTitle, artist: playListArt, cover: playListCov});
+          socket.emit('playerPret', {url: a, title: b, artist: c, cover: d});
 
         }, 500)        
       });
@@ -193,25 +189,33 @@ var room = {
 
     // Récupération des infos utile de chaque musique de la playlist deezer
     function GetUrlObjet(o) {
-        for (i in o) {
-            if (typeof(o[i])=="object") {
-              room.params.listMusiqueUrl = room.params.listMusiqueUrl + "," + o[i].preview;
-              room.params.listMusiqueTitle = room.params.listMusiqueTitle + "," + o[i].title;
-              room.params.listMusiqueArtist = room.params.listMusiqueArtist + "," + o[i].artist.name;
-              room.params.listMusiqueCover = room.params.listMusiqueCover + "," + o[i].album.cover;
-            }
+
+      room.params.listMusiqueUrl = new Array();
+      room.params.listMusiqueTitle = new Array();
+      room.params.listMusiqueArtist = new Array();
+      room.params.listMusiqueCover = new Array();
+
+        for (var i=0; i<o.length; i++) {
+            
+              room.params.listMusiqueUrl.push(o[i].preview);
+              room.params.listMusiqueTitle.push(o[i].title);
+              room.params.listMusiqueArtist.push(o[i].artist.name);
+              room.params.listMusiqueCover.push(o[i].album.cover);
+            
         }
     }
 
     DZ.init({
       appId : '125515',
-      channelUrl : 'http://web-infocom.fr/hetic/htmlcss',
+      channelUrl : '',
       player : {
         onload : function(){}
       }
     });
 
-    DZ.api('playlist/589406715', function(response){
+    DZ.api('playlist/640657295', function(response){
+
+      console.log(response);
       //Je récupére l'objet contenant la liste objet de chaque musique
       GetUrlObjet(response.tracks.data);
       //Je transforme mes bojets en deux tableau urlMP3 et Titre
