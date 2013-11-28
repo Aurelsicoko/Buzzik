@@ -90,6 +90,7 @@
 			    <div class="pure-u-1-2 video-container l-box">
 				    	<video controls autobuffer id="video">
 				    		 <source src="video/motion_presentation.mp4" type="video/mp4">
+				    		 	<source src="video/motion_presentation.ogg" type="video/ogg">
 				    		 Your browser does not support the video tag.
 				    	</video>
 			    	<!-- <iframe src="http://www.youtube.com/embed/LHVJumOSCyE" frameborder="0" width="540" height="315"></iframe> -->
