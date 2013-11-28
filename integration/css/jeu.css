@@ -1,0 +1,405 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+@font-face {
+    font-family: 'Sego UI';
+    src: url('../font/segoeuil.eot');
+    src: url('../font/segoeuil.eot?#iefix') format('embedded-opentype'),
+         url('../font/segoeuil.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font-family: "Sego UI", Calibri;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+	font-family: "Sego UI", Calibri;
+	background-color: #387ca5;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+img {
+	max-width: 100%;
+	height: auto;
+}
+
+section #all{
+	
+}
+
+/* STYLE CSS */
+
+.orange{
+	color: #e84c3d;
+}
+
+.fsNormal{
+	font-size: 1em;
+}
+
+.fsBold{
+	font-weight: bold
+}
+
+.alignRight{
+	text-align: right;
+}
+
+.alignCenter{
+	text-align: center;
+	margin: auto;
+}
+
+.verticalAlignMiddle{
+	vertical-align: middle;
+}
+
+.marginTop{
+	margin-top: 2em;
+}
+
+.marginTopSmall{
+	margin-top: 1em;
+}
+
+.marginBottom{
+	margin-bottom: 2em;
+}
+
+.marginBottomSmall{
+	margin-bottom: 1em;
+}
+
+.borderRed{
+	border: 4px solid #e84c3d;
+}
+
+.borderWhite{
+	border: 4px solid white;
+}
+
+/* GENERAL CSS */
+
+.content{
+	max-width: 1050px;
+	margin: auto;
+	height: 100%;
+}
+
+.content h2{
+	width: 100%;
+	color: #ffffff;
+	display: inline-block;
+	text-align: center;
+	padding-top: .8em;
+	padding-bottom: .8em;
+	margin-bottom: 2em;
+	border: 1px solid #ffffff;
+}
+
+#jeu{
+	overflow: hidden;
+	width: 100%;
+	height: 100%;
+}
+
+#jeu .score{
+	width: 100%;
+	margin: auto;
+	margin-bottom: 2em;
+}
+
+#jeu .score li:first-of-type{
+	width: 20%;
+	text-align: left;
+}
+
+#jeu .score li:last-of-type{
+	width: 20%;
+	text-align: right;
+}
+
+
+#jeu .score li{
+	width: 29.4%;
+	text-align: center;
+	display: inline-block;
+	padding-top: 1.5em;
+}
+
+#jeu .score li img{
+	width: 6em;
+}
+
+#jeu .score h3{
+	color: white;
+	font-size: .9em;
+	padding: .5em;
+	margin-top: .5em;
+}
+
+#jeu .score h3:last-of-type{
+	color: white;
+	font-size: .9em;
+	padding: .3em;
+}
+
+#jeu .score p{
+	color: white;
+	font-size: 1.5em;
+	font-weight: bold;
+}
+
+.titres{
+	position: relative;
+	width: 100%;
+	height: 50%;
+	overflow: scroll;
+	overflow-x: hidden;
+	border-bottom: 3px solid #125177;
+}
+
+.titres span{
+	display: block;
+	position: absolute;
+	right: 45%;
+	bottom: 0;
+	font-size: 4em;
+	color: #125177;
+	cursor: pointer;
+	transform: rotate(90deg);
+	-webkit-transform: rotate(90deg);
+	-webkit-animation: clickme 1.5s infinite ease;
+}
+
+.titres li{
+	width: auto;
+	overflow: hidden;
+	padding: .5em;
+	margin-top: 1.5em;
+	background-color: white;
+}
+
+.titres li:first-of-type{
+	margin-top: 0;
+}
+
+.titres li>img{
+	display: inline-block;
+	width: 15%;
+}
+
+.titres li>p{
+	color: #e84c3d;
+	width: 60%;
+	padding-left: 5%;
+	font-size: 1em;
+	display: inline-block;
+	vertical-align: 150%;
+}
+
+/*.titres li>p:last-of-type{
+	width: 5%;
+	vertical-align: 200%;
+	text-align: right;
+}*/
+
+.lePlayer{
+	width: 100%;
+	height: 100%;
+	position: relative;
+}
+
+#buffer{
+	position: absolute;
+	right: 0;
+	top: 10vh;
+	width: 50vh;
+	height: 50vh;
+	margin: auto;
+}
+
+#buffer svg{
+	margin: auto;
+	left: 0;
+}
+
+#divPlayer{
+	position: absolute;
+	overflow: hidden;
+	display: block;
+	color: white;
+	text-align: center;
+	height: 46vh;
+	width: 46vh;
+	left: 2vh;
+	top: 2vh;
+	border-radius: 50%;
+	background-color: #e84c3d;
+}
+
+#button{
+	position:absolute;
+	top:0;
+	left:0;
+	z-index:2;
+	height:100%;
+	width:100%;
+	border-radius:50%;
+	opacity:.5;
+	text-align:center;
+	background:transparent;
+	transition:opacity .4s ease, -webkit-transform .4s ease;
+}
+
+#button.off{
+	-webkit-animation: rotateIn .2s ease;
+}
+
+#button.loading{
+	-webkit-animation: loading 1s infinite linear;
+}
+
+#button.playing>span{
+	display:inline-block;
+	height:40%;
+	width:15%;
+	background:#fff;
+	margin:30% .5em 0 0;
+	-webkit-animation: rotateIn .2s ease;
+}
+
+#button.off>span:first-of-type{
+	display: inline-block;
+	width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-image: url('../images/icon_play.png');
+    background-size: 65%;
+    background-repeat: no-repeat;
+    background-position: 60% center;
+}
+
+#button #timer{
+	width: 100%;
+	position: absolute;
+	bottom: 10%;
+	font-size: 2em;
+	text-align: center;
+	color: white;
+}
+
+
+#button .caSentLaFin{
+	-webkit-animation: caSentLaFin 1s infinite ease;
+}
+
+@-webkit-keyframes caSentLaFin {
+    0% {font-size:2em;}
+    50% {font-size:3em;}
+    100% {font-size:2em;}
+}
+
+@-webkit-keyframes loading {
+    0% {-webkit-transform: rotate(0deg);}
+    100% {-webkit-transform: rotate(360deg);}
+}
+
+@-webkit-keyframes clickme {
+    0% {opacity:1;}
+    50% {opacity: .3}
+    100% {opacity:1;}
+}
+
+@-webkit-keyframes rotateIn {
+        0% {
+                -webkit-transform-origin: center center;
+                -webkit-transform: rotate(-200deg);
+                opacity: 0;
+        }
+
+        100% {
+                -webkit-transform-origin: center center;
+                -webkit-transform: rotate(0);
+                opacity: .5;
+        }
+}
+@-moz-keyframes rotateIn {
+        0% {
+                -moz-transform-origin: center center;
+                -moz-transform: rotate(-200deg);
+                opacity: 0;
+        }
+
+        100% {
+                -moz-transform-origin: center center;
+                -moz-transform: rotate(0);
+                opacity: .5;
+        }
+}
+@-o-keyframes rotateIn {
+        0% {
+                -o-transform-origin: center center;
+                -o-transform: rotate(-200deg);
+                opacity: 0;
+        }
+
+        100% {
+                -o-transform-origin: center center;
+                -o-transform: rotate(0);
+                opacity: .5;
+        }
+}
+@keyframes rotateIn {
+        0% {
+                transform-origin: center center;
+                transform: rotate(-200deg);
+                opacity: 0;
+        }
+
+        100% {
+                transform-origin: center center;
+                transform: rotate(0);
+                opacity: .5;
+        }
+}
