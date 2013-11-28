@@ -166,8 +166,11 @@ socket.on('connect', function () {
       player.setFile(room.numTrack);
       if(room.etat == "play") {
         player.play();
-        $("path").remove();
       }
+
+      setTimeout(function(){
+        $("path").remove();
+      }, 500);  
     }
   }); 
 
